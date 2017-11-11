@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="blue_sapphire">#2E4C98</color>
+    <color name="blue_light">#E64875e7</color>
+    <color name="blue_dark">#E64875e7</color>
+
+    <color name="gray_emperor">#555555</color>
+    <color name="gray_gallery">#EDEDED</color>
+</resources>

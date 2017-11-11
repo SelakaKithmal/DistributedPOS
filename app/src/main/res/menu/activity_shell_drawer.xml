@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:checkableBehavior="single"
+        android:orderInCategory="0">
+        <item
+            android:id="@+id/nav_feed"
+            android:icon="@drawable/menu_home"
+            android:title="Nav 01" />
+        <item
+            android:id="@+id/nav_alerts"
+            android:icon="@drawable/menu_home"
+            android:title="Nav 02" />
+        <item
+            android:id="@+id/nav_circles"
+            android:icon="@drawable/menu_home"
+            android:title="Nav 03" />
+        <item
+            android:id="@+id/nav_placeOfInterest"
+            android:icon="@drawable/menu_home"
+            android:title="Nav 04" />
+    </group>
+
+    <group android:orderInCategory="3">
+        <item
+            android:id="@+id/nav_logOut"
+            android:icon="@drawable/menu_home"
+            android:title="Logout" />
+    </group>
+</menu>

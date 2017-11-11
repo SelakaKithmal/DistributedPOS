@@ -1,0 +1,61 @@
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/.idea/modules.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+*.apk
+*.ap_
+
+#built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+
+/.gradle
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+build/
+
+#NDK
+obj/
+/app/*.iml
+/app/app.iml
+/build/generated/mockable-android-25.jar
+
+
+2.14.1
+/.gradle/3.3/taskArtifacts/fileHashes.bin
+/.gradle/3.3/taskArtifacts/fileSnapshots.bin
+/.gradle/3.3/taskArtifacts/taskArtifacts.bin
+/.gradle/3.3/taskArtifacts/taskArtifacts.lock
+
