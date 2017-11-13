@@ -4,21 +4,21 @@
         android:checkableBehavior="single"
         android:orderInCategory="0">
         <item
-            android:id="@+id/nav_feed"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/menu_home"
-            android:title="Nav 01" />
+            android:title="My Profile" />
         <item
-            android:id="@+id/nav_alerts"
+            android:id="@+id/nav_scanner"
             android:icon="@drawable/menu_home"
-            android:title="Nav 02" />
+            android:title="Open Scanner" />
         <item
-            android:id="@+id/nav_circles"
+            android:id="@+id/nav_item"
             android:icon="@drawable/menu_home"
-            android:title="Nav 03" />
+            android:title="Purchased Items" />
         <item
-            android:id="@+id/nav_placeOfInterest"
+            android:id="@+id/nav_history"
             android:icon="@drawable/menu_home"
-            android:title="Nav 04" />
+            android:title="Histroy" />
     </group>
 
     <group android:orderInCategory="3">

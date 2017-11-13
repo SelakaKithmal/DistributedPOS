@@ -17,12 +17,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.distributedpos.app.R;
+import com.distributedpos.app.ui.fragment.Home;
+import com.distributedpos.app.ui.fragment.Scanner;
+import com.distributedpos.app.ui.item.ItemList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ShellActivity extends BaseActivity implements NavigationView
-        .OnNavigationItemSelectedListener{
+        .OnNavigationItemSelectedListener {
 
     @BindView(R.id.main_toolbar)
     Toolbar toolbar;
@@ -42,6 +45,7 @@ public class ShellActivity extends BaseActivity implements NavigationView
         setContentView(R.layout.activity_shell);
         ButterKnife.bind(this);
         initViews();
+        loadMainContainer(new Home());
     }
 
     private void initViews() {
@@ -76,6 +80,15 @@ public class ShellActivity extends BaseActivity implements NavigationView
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.nav_scanner:
+                loadMainContainer(new Scanner());
+                break;
+            case R.id.nav_item:
+                loadMainContainer(ItemList.newInstance("item"));
+                break;
+        }
+        return true;
     }
 }

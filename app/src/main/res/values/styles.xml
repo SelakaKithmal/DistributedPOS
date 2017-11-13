@@ -12,7 +12,7 @@
         <item name="android:windowBackground">@color/white</item>
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@android:color/transparent</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/blue_sapphire</item>
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textColorSecondary">@null</item>
         <item name="windowActionModeOverlay">true</item>
@@ -27,6 +27,13 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorControlNormal">@color/blue_sapphire</item>
+        <item name="colorControlActivated">@color/blue_sapphire</item>
+        <item name="colorAccent">@color/blue_sapphire</item>
+
+    </style>
 
 
 
