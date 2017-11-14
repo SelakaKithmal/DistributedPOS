@@ -27,8 +27,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="false"
                 android:contentDescription="@null"
-                android:cropToPadding="false"
-                 />
+                android:cropToPadding="false" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,21 +63,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="true"
-                    android:hint="Telepone Number"
+                    android:hint="Telephone Number"
                     app:hintEnabled="true">
 
                     <EditText
-                        android:id="@+id/reset_code_field"
+                        android:id="@+id/tp_field"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:padding="10dp"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/blue_sapphire" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/submit_button"
                 android:layout_width="match_parent"

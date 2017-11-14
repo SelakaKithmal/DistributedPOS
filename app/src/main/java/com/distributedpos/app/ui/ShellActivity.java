@@ -2,7 +2,6 @@ package com.distributedpos.app.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,9 +16,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.distributedpos.app.R;
+import com.distributedpos.app.model.Item;
 import com.distributedpos.app.ui.fragment.Home;
 import com.distributedpos.app.ui.fragment.Scanner;
 import com.distributedpos.app.ui.item.ItemList;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +44,7 @@ public class ShellActivity extends BaseActivity implements NavigationView
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     View headerView;
+    private ArrayList<Item> itemList;
 
 
     @Override
@@ -53,6 +61,7 @@ public class ShellActivity extends BaseActivity implements NavigationView
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+        itemList = new ArrayList<>();
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         navigationView.setNavigationItemSelectedListener(this);
@@ -64,6 +73,10 @@ public class ShellActivity extends BaseActivity implements NavigationView
     public void setToolbarTitle(int title) {
         toolbarTitle.setText(title);
         toolbarTitle.setTextColor(ContextCompat.getColor(this, R.color.blue_sapphire));
+    }
+
+    public void addItemsToList(Item currentItem) {
+        itemList.add(currentItem);
     }
 
     public void loadMainContainer(Fragment fragment) {
@@ -86,7 +99,16 @@ public class ShellActivity extends BaseActivity implements NavigationView
                 loadMainContainer(new Scanner());
                 break;
             case R.id.nav_item:
-                loadMainContainer(ItemList.newInstance("item"));
+                if (itemList.size() > 0) {
+                    Map<String, Item> map = new LinkedHashMap<>();
+                    for (Item ays : itemList) {
+                        map.put(ays.getItemCode(), ays);
+                    }
+                    itemList.clear();
+                    itemList.addAll(map.values());
+
+                    loadMainContainer(ItemList.newInstance(itemList));
+                }
                 break;
         }
         return true;

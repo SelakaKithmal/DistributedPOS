@@ -1,6 +1,7 @@
 package com.distributedpos.app.ui.fragment;
 
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,7 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.distributedpos.app.R;
+import com.distributedpos.app.model.Item;
+import com.distributedpos.app.ui.ShellActivity;
 import com.google.zxing.Result;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +42,7 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
     private ZXingScannerView mScannerView;
     private static final int REQUEST_CAMERA = 1;
     private static int camId = Camera.CameraInfo.CAMERA_FACING_BACK;
+    private ShellActivity shellActivity;
 
 
     public Scanner() {
@@ -48,6 +56,10 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
 
         View view = inflater.inflate(R.layout.fragment_scanner, container, false);
         ButterKnife.bind(this, view);
+        Activity activity = getActivity();
+        if (activity instanceof ShellActivity) {
+            shellActivity = (ShellActivity) activity;
+        }
         mScannerView = new ZXingScannerView(getActivity());
         mainContainer.addView(mScannerView);
         return view;
@@ -91,18 +103,24 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
 
     @Override
     public void handleResult(Result result) {
-        final String result1 = result.getText();
-        Log.e("QRCodeScanner", result.getText());
-        Log.e("QRCodeScanner", result.getBarcodeFormat().toString());
+        final String qrResult = result.getText();
+        List<String> itemCategoryList = Arrays.asList(qrResult.split(","));
         AlertDialog.Builder builder = new AlertDialog.Builder
                 (new ContextThemeWrapper(getActivity(), R.style.DialogTheme));
-        builder.setTitle("Scan Result");
-        builder.setPositiveButton("OK", (dialog, which) -> mScannerView.resumeCameraPreview(Scanner.this));
-        builder.setNeutralButton("Visit", (dialog, which) -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result1));
-            startActivity(browserIntent);
+        builder.setTitle(itemCategoryList.get(2));
+        builder.setPositiveButton("OK", (dialog, which) ->
+        {
+            Item currentItem = new Item(itemCategoryList.get(0), itemCategoryList.get(1)
+                    , itemCategoryList.get(2), itemCategoryList.get(3));
+            shellActivity.addItemsToList(currentItem);
+            mScannerView.resumeCameraPreview(Scanner.this);
         });
-        builder.setMessage(result.getText());
+        builder.setNeutralButton("Cancel", (dialog, which) -> {
+            mScannerView.resumeCameraPreview(Scanner.this);
+            //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result1));
+            //startActivity(browserIntent);
+        });
+        builder.setMessage("Item price Rs.:" + itemCategoryList.get(3) + " Add to cart");
         AlertDialog alert1 = builder.create();
         alert1.show();
     }

@@ -17,7 +17,6 @@ import com.distributedpos.app.model.Item;
 import com.distributedpos.app.ui.ShellActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,25 +33,19 @@ public class ItemList extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     @BindView(R.id.item_container)
     SwipeRefreshLayout itemContainer;
     private ItemListAdapter listAdapter;
-    private List<Item> itemList;
+    private ArrayList<Item> currentItemList;
 
-    public static ItemList newInstance(String items) {
+    public static ItemList newInstance(ArrayList<Item> currentItemList) {
         ItemList itemList = new ItemList();
         Bundle args = new Bundle();
-        args.putString(ARG_NAME, items);
+        args.putParcelableArrayList(ARG_NAME, currentItemList);
         itemList.setArguments(args);
         return itemList;
     }
 
-    public ItemList() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
         ButterKnife.bind(this, view);
         Activity activity = getActivity();
@@ -64,62 +57,32 @@ public class ItemList extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     }
 
     private void initViews() {
-        itemList= new ArrayList<>();
+        currentItemList = new ArrayList<>();
+        currentItemList = getArguments().getParcelableArrayList(ARG_NAME);
         shellActivity.setToolbarTitle(R.string.text_item);
         this.itemContainer.setOnRefreshListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerItemList.setLayoutManager(linearLayoutManager);
+        if (currentItemList.size() > 0) {
+            prepareItem();
+        }
 
-        prepareAlbums();
 
     }
 
-    private void prepareAlbums() {
-
-        Item a = new Item("True Romance", "130 Rs");
-        itemList.add(a);
-
-        a = new Item("Xscpae", "230 Rs");
-        itemList.add(a);
-
-        a = new Item("Maroon 5", "430 Rs");
-        itemList.add(a);
-
-        a = new Item("Born to Die", "180 Rs");
-        itemList.add(a);
-
-        a = new Item("Honeymoon", "170 Rs");
-        itemList.add(a);
-
-        a = new Item("I Need a Doctor", "190 Rs");
-        itemList.add(a);
-
-        a = new Item("Loud", "1730 Rs");
-        itemList.add(a);
-
-        a = new Item("Legend", "1370 Rs");
-        itemList.add(a);
-
-        a = new Item("Hello", "130 Rs");
-        itemList.add(a);
-
-        a = new Item("Greatest Hits", "130 Rs");
-        itemList.add(a);
-
-        listAdapter = new ItemListAdapter(getContext(), itemList);
+    private void prepareItem() {
+        listAdapter = new ItemListAdapter(getContext(), currentItemList);
         recyclerItemList.setAdapter(listAdapter);
-
-        itemCount.setText(itemList.size() + " items");
-
+        itemCount.setText(currentItemList.size() + " items");
         itemContainer.setRefreshing(false);
-
 
     }
 
     @Override
     public void onRefresh() {
         listAdapter.clear();
+        prepareItem();
 
     }
 }

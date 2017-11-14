@@ -6,6 +6,7 @@
 
 
     <color name="white">#FFFFFF</color>
+    <color name="white_transparency">#b9ffffff</color>
 
     <color name="blue_sapphire">#2E4C98</color>
     <color name="blue_light">#E64875e7</color>

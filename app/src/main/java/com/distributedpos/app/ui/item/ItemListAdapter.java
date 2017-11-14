@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.distributedpos.app.R;
 import com.distributedpos.app.model.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -19,11 +21,11 @@ import butterknife.ButterKnife;
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemListViewHolder> {
 
     private final Context mContext;
-    private final List<Item> itemList;
+    private final ArrayList<Item> itemList;
     private final int DIRECTORY_DETAIL = 100;
     private View directoryItemView;
 
-    ItemListAdapter(Context mContext, List<Item> itemList) {
+    ItemListAdapter(Context mContext, ArrayList<Item> itemList) {
         this.mContext = mContext;
         this.itemList = itemList;
     }
@@ -39,9 +41,14 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
     @Override
     public void onBindViewHolder(ItemListViewHolder holder, int position) {
         Item item = itemList.get(position);
-
-        holder.title.setText(item.getItemName());
-        holder.price.setText(item.getItemPrice());
+        holder.itemName.setText(item.getItemName());
+        holder.itemPrice.setText(item.getItemPrice());
+        holder.itemId.setText(item.getItemCode());
+        holder.delete.setOnClickListener(v -> {
+            itemList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, itemList.size());
+        });
 
     }
 
@@ -59,10 +66,15 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
 
     class ItemListViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title)
-        TextView title;
-        @BindView(R.id.price)
-        TextView price;
+        @BindView(R.id.item_name)
+        TextView itemName;
+        @BindView(R.id.item_id)
+        TextView itemId;
+        @BindView(R.id.item_price)
+        TextView itemPrice;
+        @BindView(R.id.item_delete)
+        ImageView delete;
+
 
         ItemListViewHolder(View itemView) {
             super(itemView);
