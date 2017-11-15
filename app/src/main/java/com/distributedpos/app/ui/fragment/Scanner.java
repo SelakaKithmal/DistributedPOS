@@ -105,24 +105,29 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
     public void handleResult(Result result) {
         final String qrResult = result.getText();
         List<String> itemCategoryList = Arrays.asList(qrResult.split(","));
-        AlertDialog.Builder builder = new AlertDialog.Builder
-                (new ContextThemeWrapper(getActivity(), R.style.DialogTheme));
-        builder.setTitle(itemCategoryList.get(2));
-        builder.setPositiveButton("OK", (dialog, which) ->
-        {
-            Item currentItem = new Item(itemCategoryList.get(0), itemCategoryList.get(1)
-                    , itemCategoryList.get(2), itemCategoryList.get(3));
-            shellActivity.addItemsToList(currentItem);
-            mScannerView.resumeCameraPreview(Scanner.this);
-        });
-        builder.setNeutralButton("Cancel", (dialog, which) -> {
-            mScannerView.resumeCameraPreview(Scanner.this);
-            //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result1));
-            //startActivity(browserIntent);
-        });
-        builder.setMessage("Item price Rs.:" + itemCategoryList.get(3) + " Add to cart");
-        AlertDialog alert1 = builder.create();
-        alert1.show();
+        if (itemCategoryList.size() == 4) {
+            AlertDialog.Builder builder = new AlertDialog.Builder
+                    (new ContextThemeWrapper(getActivity(), R.style.DialogTheme));
+            builder.setTitle(itemCategoryList.get(2));
+            builder.setPositiveButton("OK", (dialog, which) ->
+            {
+                Item currentItem = new Item(itemCategoryList.get(0), itemCategoryList.get(1)
+                        , itemCategoryList.get(2), itemCategoryList.get(3));
+                shellActivity.addItemsToList(currentItem);
+                mScannerView.resumeCameraPreview(Scanner.this);
+            });
+            builder.setNeutralButton("Cancel", (dialog, which) -> {
+                mScannerView.resumeCameraPreview(Scanner.this);
+                //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result1));
+                //startActivity(browserIntent);
+            });
+            builder.setMessage("Item price Rs.:" + itemCategoryList.get(3) + " Add to cart");
+            AlertDialog alert1 = builder.create();
+            alert1.show();
+        } else {
+            shellActivity.showSnackBar("Item Not Found",
+                    R.color.red_cinnabar);
+        }
     }
 
     @Override

@@ -47,6 +47,7 @@
                         android:id="@+id/item_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_above="@+id/bottom_layout"
                         android:layout_below="@+id/item_count">
 
                         <android.support.v7.widget.RecyclerView
@@ -58,6 +59,27 @@
                         </android.support.v7.widget.RecyclerView>
 
                     </android.support.v4.widget.SwipeRefreshLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bottom_layout"
+                        android:layout_width="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="vertical"
+                        android:background="#80000000"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <Button
+                            android:id="@+id/generateCode"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:text="Generate Code"
+                            android:layout_height="wrap_content" />
+
+
+                    </LinearLayout>
+
+
                 </RelativeLayout>
             </FrameLayout>
 

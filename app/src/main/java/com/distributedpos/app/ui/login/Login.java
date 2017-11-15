@@ -35,7 +35,8 @@ public class Login extends BaseActivity {
 
     @OnClick(R.id.submit_button)
     void submit() {
-        checkUser();
+        //checkUser();
+        goToLandingPage();
     }
 
     private void checkUser() {

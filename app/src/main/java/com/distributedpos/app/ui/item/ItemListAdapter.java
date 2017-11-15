@@ -24,10 +24,12 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
     private final ArrayList<Item> itemList;
     private final int DIRECTORY_DETAIL = 100;
     private View directoryItemView;
+    private OnItemDelete onItemDelete;
 
-    ItemListAdapter(Context mContext, ArrayList<Item> itemList) {
+    ItemListAdapter(Context mContext, ArrayList<Item> itemList, OnItemDelete onItemDelete) {
         this.mContext = mContext;
         this.itemList = itemList;
+        this.onItemDelete = onItemDelete;
     }
 
     @Override
@@ -42,12 +44,13 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
     public void onBindViewHolder(ItemListViewHolder holder, int position) {
         Item item = itemList.get(position);
         holder.itemName.setText(item.getItemName());
-        holder.itemPrice.setText(item.getItemPrice());
+        holder.itemPrice.setText(item.getItemPrice() + " Rs");
         holder.itemId.setText(item.getItemCode());
         holder.delete.setOnClickListener(v -> {
             itemList.remove(position);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, itemList.size());
+           // onItemDelete.onItemDelete(itemList);
         });
 
     }
@@ -61,6 +64,10 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
         int size = this.itemList.size();
         this.itemList.clear();
         notifyItemRangeRemoved(0, size);
+    }
+
+    ArrayList<Item> currentList() {
+        return itemList;
     }
 
 
@@ -81,5 +88,9 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
             ButterKnife.bind(this, itemView);
         }
 
+    }
+
+    public interface OnItemDelete {
+        void onItemDelete(ArrayList<Item> itemList);
     }
 }

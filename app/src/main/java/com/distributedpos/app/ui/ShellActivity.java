@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.distributedpos.app.R;
@@ -42,6 +43,8 @@ public class ShellActivity extends BaseActivity implements NavigationView
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @BindView(R.id.frame_container_system)
+    FrameLayout mainFrame;
     ActionBarDrawerToggle toggle;
     View headerView;
     private ArrayList<Item> itemList;
@@ -112,5 +115,9 @@ public class ShellActivity extends BaseActivity implements NavigationView
                 break;
         }
         return true;
+    }
+
+    public void showSnackBar(String message, int backgroundColour) {
+        this.showSnackBar(mainFrame, message, backgroundColour);
     }
 }
