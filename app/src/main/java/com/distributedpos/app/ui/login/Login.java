@@ -2,12 +2,15 @@ package com.distributedpos.app.ui.login;
 
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.distributedpos.app.R;
 import com.distributedpos.app.api.AuthenticationService;
 import com.distributedpos.app.api.RetrofitProvider;
 import com.distributedpos.app.helpers.MarshMallowPermission;
+import com.distributedpos.app.helpers.PreferenceManager;
+import com.distributedpos.app.model.User;
 import com.distributedpos.app.ui.BaseActivity;
 import com.distributedpos.app.ui.ShellActivity;
 
@@ -31,24 +34,27 @@ public class Login extends BaseActivity {
         this.authService = RetrofitProvider.createRetrofit(this).create(AuthenticationService.class);
         MarshMallowPermission permission = new MarshMallowPermission(this);
         permission.checkRuntimePermissions();
+        checkUser();
+    }
+
+    private void checkUser() {
+        User currentUser = new PreferenceManager(this).getUser();
+        if (currentUser != null) {
+            goToLandingPage();
+        } else {
+            launchActivity(SignUp.class);
+        }
     }
 
     @OnClick(R.id.submit_button)
     void submit() {
-        //checkUser();
-        goToLandingPage();
+
     }
 
-    private void checkUser() {
-        authSubscription = this.makeUIObservable(authService.userAuth(tpField.getText().toString()))
-                .subscribe(
-                        success -> {
-                            goToLandingPage();
-                        },
-                        error -> {
-
-                        }
-                );
+    @OnClick(R.id.sign_up_text_view)
+    void signUp() {
+        launchActivity(SignUp.class);
+        Login.this.overridePendingTransition(R.anim.animation, R.anim.animation2);
     }
 
     private void goToLandingPage() {

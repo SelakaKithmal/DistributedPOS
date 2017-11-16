@@ -60,6 +60,7 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
         if (activity instanceof ShellActivity) {
             shellActivity = (ShellActivity) activity;
         }
+        shellActivity.setToolbarTitle(R.string.text_scan_item);
         mScannerView = new ZXingScannerView(getActivity());
         mainContainer.addView(mScannerView);
         return view;

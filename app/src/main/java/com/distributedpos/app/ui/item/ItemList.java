@@ -42,6 +42,8 @@ public class ItemList extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     TextView itemCount;
     @BindView(R.id.item_container)
     SwipeRefreshLayout itemContainer;
+    @BindView(R.id.total_price)
+    TextView totalPrice;
     private ItemListAdapter listAdapter;
     private ArrayList<Item> currentItemList;
     public final static int WHITE = 0xFFFFFFFF;
@@ -95,7 +97,7 @@ public class ItemList extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         }
         String allItems = android.text.TextUtils.join(",", ids);
         try {
-            Bitmap bitmap = encodeAsBitmap("A, "+allItems);
+            Bitmap bitmap = encodeAsBitmap("A, " + allItems);
 
             QrDialog alert = new QrDialog(getContext(), bitmap,
                     Dialog::dismiss);
@@ -140,7 +142,7 @@ public class ItemList extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     private void prepareItem() {
         listAdapter = new ItemListAdapter(getContext(), currentItemList, this);
         recyclerItemList.setAdapter(listAdapter);
-        itemCount.setText(currentItemList.size() + " items");
+        resetValues();
         itemContainer.setRefreshing(false);
 
     }
@@ -154,6 +156,17 @@ public class ItemList extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
     @Override
     public void onItemDelete(ArrayList<Item> itemList) {
+        currentItemList = new ArrayList<>();
+        currentItemList.addAll(itemList);
+        resetValues();
+    }
 
+    private void resetValues() {
+        itemCount.setText(currentItemList.size() + " items");
+        int sum = 0;
+        for (int i = 0; i < currentItemList.size(); i++) {
+            sum = sum + Integer.parseInt(currentItemList.get(i).getItemPrice());
+        }
+        totalPrice.setText(String.valueOf(sum) + " Rs");
     }
 }

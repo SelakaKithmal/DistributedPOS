@@ -50,7 +50,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemLi
             itemList.remove(position);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, itemList.size());
-           // onItemDelete.onItemDelete(itemList);
+            onItemDelete.onItemDelete(itemList);
         });
 
     }

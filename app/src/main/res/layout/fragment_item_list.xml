@@ -63,20 +63,36 @@
                     <LinearLayout
                         android:id="@+id/bottom_layout"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:orientation="vertical"
                         android:background="#80000000"
                         android:gravity="center"
-                        android:layout_height="wrap_content">
+                        android:orientation="vertical">
 
-                        <Button
-                            android:id="@+id/generateCode"
-                            android:layout_width="wrap_content"
-                            android:gravity="center"
-                            android:text="Generate Code"
-                            android:layout_height="wrap_content" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <Button
+                                android:id="@+id/generateCode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:gravity="center"
+                                android:text="Generate Code" />
 
 
+                            <TextView
+                                android:id="@+id/total_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
                     </LinearLayout>
 
 

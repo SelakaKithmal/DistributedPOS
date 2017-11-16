@@ -17,7 +17,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.distributedpos.app.R;
+import com.distributedpos.app.helpers.PreferenceManager;
 import com.distributedpos.app.model.Item;
+import com.distributedpos.app.model.User;
 import com.distributedpos.app.ui.fragment.Home;
 import com.distributedpos.app.ui.fragment.Scanner;
 import com.distributedpos.app.ui.item.ItemList;
@@ -48,6 +50,7 @@ public class ShellActivity extends BaseActivity implements NavigationView
     ActionBarDrawerToggle toggle;
     View headerView;
     private ArrayList<Item> itemList;
+    private TextView headerUserEmail, headerUsername;
 
 
     @Override
@@ -64,18 +67,29 @@ public class ShellActivity extends BaseActivity implements NavigationView
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+        toolbar.setBackgroundColor(ContextCompat.getColor(this,
+                R.color.blue_sapphire));
         itemList = new ArrayList<>();
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
+        headerUsername = ButterKnife.findById(headerView, R.id.header_user_name);
+        headerUserEmail = ButterKnife.findById(headerView, R.id.header_user_email);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        setUserProfile();
+    }
+
+    public void setUserProfile() {
+        User currentUser = new PreferenceManager(this).getUser();
+        headerUsername.setText(currentUser.getCustomerName());
+        headerUserEmail.setText(currentUser.getEmail());
     }
 
     public void setToolbarTitle(int title) {
         toolbarTitle.setText(title);
-        toolbarTitle.setTextColor(ContextCompat.getColor(this, R.color.blue_sapphire));
+        toolbarTitle.setTextColor(ContextCompat.getColor(this, R.color.white));
     }
 
     public void addItemsToList(Item currentItem) {

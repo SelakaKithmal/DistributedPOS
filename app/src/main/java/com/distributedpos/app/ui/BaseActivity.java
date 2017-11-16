@@ -14,19 +14,23 @@ import android.view.WindowManager;
 
 import com.distributedpos.app.R;
 import com.distributedpos.app.api.RetrofitProvider;
+import com.distributedpos.app.helpers.CustomProgressDialog;
 
 import io.reactivex.Observable;
 
 public class BaseActivity extends AppCompatActivity {
 
+    private CustomProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         if (getResources().getBoolean(R.bool.portrait_only)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+        this.progressDialog = new CustomProgressDialog(this);
     }
 
     public void launchActivity(Class<? extends Activity> activity) {
@@ -44,6 +48,18 @@ public class BaseActivity extends AppCompatActivity {
         View snackBarView = snackbar.getView();
         snackBarView.setBackgroundColor(ContextCompat.getColor(this, backgroundColour));
         snackbar.show();
+    }
+
+    public void showProgress() {
+        if (!progressDialog.isShowing()) {
+            this.progressDialog.show();
+        }
+    }
+
+    public void hideProgress() {
+        if (progressDialog.isShowing()) {
+            this.progressDialog.dismiss();
+        }
     }
 
 

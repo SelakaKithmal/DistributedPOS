@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-
+    <color name="colorPrimary">#5C6BC0</color>
+    <color name="colorPrimaryDark">#3F51B5</color>
+    <color name="colorAccent">#9FA8DA</color>
+    <color name="colorPrimaryLight">#C5CAE9</color>
 
     <color name="white">#FFFFFF</color>
     <color name="white_transparency">#b9ffffff</color>
+    <color name="white_glass">#00ffffff</color>
 
     <color name="blue_sapphire">#2E4C98</color>
     <color name="blue_light">#E64875e7</color>
@@ -15,6 +16,7 @@
     <color name="gray_emperor">#555555</color>
     <color name="gray_gallery">#EDEDED</color>
     <color name="gray_dove">#686868</color>
+    <color name="gray_mercury">#E9E9E9</color>
 
     <color name="red_cinnabar">#E53935</color>
 </resources>
