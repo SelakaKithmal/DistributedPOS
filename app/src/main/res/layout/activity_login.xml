@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background_blure"
     tools:context="com.distributedpos.app.ui.login.Login">
 
     <LinearLayout
@@ -45,35 +45,22 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <EditText
+                android:id="@+id/tp_field"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/linear_border"
-                android:orientation="vertical"
-                android:paddingLeft="07dp"
-                android:paddingRight="07dp">
+                android:gravity="center"
+                android:hint="Telephone Number"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="15dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="16sp" />
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:hint="Telephone Number"
-                    app:hintEnabled="true">
-
-                    <EditText
-                        android:id="@+id/tp_field"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:padding="10dp"
-                        android:textColor="@color/blue_sapphire"
-                        android:textSize="16sp" />
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
 
             <Button
                 android:id="@+id/submit_button"
@@ -81,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
                 android:background="@drawable/button_default"
+                android:padding="15dp"
                 android:text="Submit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

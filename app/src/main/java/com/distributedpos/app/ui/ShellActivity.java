@@ -21,8 +21,10 @@ import com.distributedpos.app.helpers.PreferenceManager;
 import com.distributedpos.app.model.Item;
 import com.distributedpos.app.model.User;
 import com.distributedpos.app.ui.fragment.Home;
+import com.distributedpos.app.ui.fragment.Profile;
 import com.distributedpos.app.ui.fragment.Scanner;
 import com.distributedpos.app.ui.item.ItemList;
+import com.distributedpos.app.ui.login.Login;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -60,6 +62,7 @@ public class ShellActivity extends BaseActivity implements NavigationView
         ButterKnife.bind(this);
         initViews();
         loadMainContainer(new Home());
+        setToolbarTitle("Home");
     }
 
     private void initViews() {
@@ -83,11 +86,13 @@ public class ShellActivity extends BaseActivity implements NavigationView
 
     public void setUserProfile() {
         User currentUser = new PreferenceManager(this).getUser();
-        headerUsername.setText(currentUser.getCustomerName());
-        headerUserEmail.setText(currentUser.getEmail());
+        if (currentUser != null) {
+            headerUsername.setText(currentUser.getCustomerName());
+            headerUserEmail.setText(currentUser.getEmail());
+        }
     }
 
-    public void setToolbarTitle(int title) {
+    public void setToolbarTitle(String title) {
         toolbarTitle.setText(title);
         toolbarTitle.setTextColor(ContextCompat.getColor(this, R.color.white));
     }
@@ -126,6 +131,16 @@ public class ShellActivity extends BaseActivity implements NavigationView
 
                     loadMainContainer(ItemList.newInstance(itemList));
                 }
+                break;
+            case R.id.nav_profile:
+                loadMainContainer(new Profile());
+                break;
+            case R.id.nav_history:
+                break;
+            case R.id.nav_logOut:
+                this.finish();
+                launchActivity(Login.class);
+                this.overridePendingTransition(R.anim.back_in, R.anim.back_out);
                 break;
         }
         return true;

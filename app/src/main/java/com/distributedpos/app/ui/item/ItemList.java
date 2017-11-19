@@ -75,7 +75,7 @@ public class ItemList extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     private void initViews() {
         currentItemList = new ArrayList<>();
         currentItemList = getArguments().getParcelableArrayList(ARG_NAME);
-        shellActivity.setToolbarTitle(R.string.text_item);
+        shellActivity.setToolbarTitle(getString(R.string.text_item));
         this.itemContainer.setOnRefreshListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

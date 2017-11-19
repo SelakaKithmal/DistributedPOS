@@ -60,7 +60,7 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
         if (activity instanceof ShellActivity) {
             shellActivity = (ShellActivity) activity;
         }
-        shellActivity.setToolbarTitle(R.string.text_scan_item);
+        shellActivity.setToolbarTitle(getString(R.string.text_scan_item));
         mScannerView = new ZXingScannerView(getActivity());
         mainContainer.addView(mScannerView);
         return view;
@@ -119,8 +119,7 @@ public class Scanner extends Fragment implements ZXingScannerView.ResultHandler 
             });
             builder.setNeutralButton("Cancel", (dialog, which) -> {
                 mScannerView.resumeCameraPreview(Scanner.this);
-                //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(result1));
-                //startActivity(browserIntent);
+
             });
             builder.setMessage("Item price Rs.:" + itemCategoryList.get(3) + " Add to cart");
             AlertDialog alert1 = builder.create();

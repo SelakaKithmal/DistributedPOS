@@ -21,7 +21,7 @@
             android:title="Histroy" />
     </group>
 
-    <group android:orderInCategory="3">
+    <group android:orderInCategory="1">
         <item
             android:id="@+id/nav_logOut"
             android:icon="@drawable/menu_home"

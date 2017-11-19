@@ -48,7 +48,7 @@ public class Login extends BaseActivity {
 
     @OnClick(R.id.submit_button)
     void submit() {
-
+        goToLandingPage();
     }
 
     @OnClick(R.id.sign_up_text_view)

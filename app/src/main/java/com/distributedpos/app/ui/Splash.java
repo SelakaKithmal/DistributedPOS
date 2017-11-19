@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 
+
 public class Splash extends BaseActivity {
 
     private static final long SPLASH_TIME = 2L;
