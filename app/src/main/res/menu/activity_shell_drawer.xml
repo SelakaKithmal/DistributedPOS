@@ -5,26 +5,26 @@
         android:orderInCategory="0">
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/menu_home"
+            android:icon="@drawable/ic_peopleofinterest"
             android:title="My Profile" />
         <item
             android:id="@+id/nav_scanner"
-            android:icon="@drawable/menu_home"
+            android:icon="@drawable/ic_mobile"
             android:title="Open Scanner" />
         <item
             android:id="@+id/nav_item"
-            android:icon="@drawable/menu_home"
+            android:icon="@drawable/ic_selfpost"
             android:title="Purchased Items" />
         <item
             android:id="@+id/nav_history"
-            android:icon="@drawable/menu_home"
+            android:icon="@android:drawable/ic_menu_save"
             android:title="Histroy" />
     </group>
 
     <group android:orderInCategory="1">
         <item
             android:id="@+id/nav_logOut"
-            android:icon="@drawable/menu_home"
+            android:icon="@drawable/ic_logout"
             android:title="Logout" />
     </group>
 </menu>
